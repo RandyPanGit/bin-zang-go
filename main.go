@@ -1,17 +1,15 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
+
+	"github.com/RandyPanGit/bin-zang-go/internal/delivery"
+	"github.com/gorilla/mux"
 )
 
 func main() {
-	http.HandleFunc("/users", handleUsers)
+	mux := mux.NewRouter()
+	delivery.BuildRoute(mux)
+	http.Handle("/", mux)
 	http.ListenAndServe(":8080", nil)
-}
-
-func handleUsers(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "ID:1,Name:Randy")
-	fmt.Fprintln(w, "ID:2,Name:David")
-	fmt.Fprintln(w, "ID:3,Name:shawn")
 }
