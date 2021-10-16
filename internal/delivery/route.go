@@ -28,23 +28,6 @@ func handleUsers(w http.ResponseWriter, r *http.Request) {
 		userData, _ := usecase.AddNewUser(user)
 		w.WriteHeader(http.StatusOK)
 		w.Write(userData)
-	// case "PUT":
-	// 	var user repository.User
-	// 	err := json.NewDecoder(r.Body).Decode(&user)
-	// 	if err != nil {
-	// 		http.Error(w, err.Error(), http.StatusBadRequest)
-	// 		return
-	// 	}
-	// 	for i := 0; i < len(users); i++ {
-	// 		if user.ID == users[i].ID {
-	// 			users[i] = user
-	// 			break
-	// 		}
-	// 	}
-	// 	userData, _ := json.Marshal(user)
-	// 	w.WriteHeader(http.StatusOK)
-	// 	w.Write(userData)
-
 	default:
 		w.WriteHeader(http.StatusNotFound)
 		fmt.Fprint(w, "{\"message\": \"not found\"}")
