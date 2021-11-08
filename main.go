@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"os"
 
@@ -13,6 +14,7 @@ func main() {
 	mux := mux.NewRouter()
 	delivery.BuildRoute(mux)
 	port, _ = os.LookupEnv("PORT")
+	fmt.Print(port)
 	http.Handle("/", mux)
 	http.ListenAndServe(port, nil)
 }
