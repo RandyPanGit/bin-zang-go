@@ -10,11 +10,13 @@ import (
 )
 
 func main() {
-	var port string
+	port, ok := os.LookupEnv("PORT")
+	if !ok {
+		port = "8081"
+	}
 	mux := mux.NewRouter()
 	delivery.BuildRoute(mux)
-	port, _ = os.LookupEnv("PORT")
 	fmt.Print(port)
 	http.Handle("/", mux)
-	http.ListenAndServe(port, nil)
+	http.ListenAndServe(":"+port, nil)
 }
